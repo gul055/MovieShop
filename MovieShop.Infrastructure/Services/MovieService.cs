@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MovieShop.Core.Models.Response;
+using MovieShop.Core.RepositoryInterfaces;
 using MovieShop.Core.ServiceInterfaces;
 
 namespace MovieShop.Infrastructure.Services
 {
     public class MovieService : IMovieService
     {
+        private readonly IMovieRepository _movieRepository;
+        public MovieService(IMovieRepository movieRepository)
+        {
+            _movieRepository = movieRepository;
+        }
         public Task<MovieDetailsResponseModel> CreateMovie(MovieCreateRequest movieCreateRequest)
         {
             throw new NotImplementedException();
@@ -28,9 +35,10 @@ namespace MovieShop.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<MovieDetailsResponseModel> GetMovieAsync(int id)
+        public async Task<MovieDetailsResponseModel> GetMovieAsync(int id)
         {
-            throw new NotImplementedException();
+            var movie = await _movieRepository.GetByIdAsync(id);
+
         }
 
         public Task<IEnumerable<MovieResponseModel>> GetMoviesByGenre(int genreId)
