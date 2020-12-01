@@ -15,7 +15,7 @@ namespace MovieShop.Infrastructure.Services
         {
             _movieRepository = movieRepository;
         }
-        public Task<MovieDetailsResponseModel> CreateMovie(MovieCreateRequest movieCreateRequest)
+        /*public Task<MovieDetailsResponseModel> CreateMovie(MovieCreateRequest movieCreateRequest)
         {
             throw new NotImplementedException();
         }
@@ -28,7 +28,7 @@ namespace MovieShop.Infrastructure.Services
         public Task<PaginatedList<MovieResponseModel>> GetAllPurchasesByMovieId(int movieId)
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         public Task<IEnumerable<MovieResponseModel>> GetHighestGrossingMovies()
         {
@@ -38,7 +38,7 @@ namespace MovieShop.Infrastructure.Services
         public async Task<MovieDetailsResponseModel> GetMovieAsync(int id)
         {
             var movie = await _movieRepository.GetByIdAsync(id);
-
+            return null;
         }
 
         public Task<IEnumerable<MovieResponseModel>> GetMoviesByGenre(int genreId)
@@ -46,29 +46,29 @@ namespace MovieShop.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<PagedResultSet<MovieResponseModel>> GetMoviesByPagination(int pageSize = 20, int page = 0, string title = "")
+        /*public Task<PagedResultSet<MovieResponseModel>> GetMoviesByPagination(int pageSize = 20, int page = 0, string title = "")
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         public Task<int> GetMoviesCount(string title = "")
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ReviewMovieResponseModel>> GetReviewsForMovie(int id)
+        /*public Task<IEnumerable<ReviewMovieResponseModel>> GetReviewsForMovie(int id)
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         public Task<IEnumerable<MovieResponseModel>> GetTopRatedMovies()
         {
             throw new NotImplementedException();
         }
 
-        public Task<MovieDetailsResponseModel> UpdateMovie(MovieCreateRequest movieCreateRequest)
+        /*public Task<MovieDetailsResponseModel> UpdateMovie(MovieCreateRequest movieCreateRequest)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }
