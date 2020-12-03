@@ -21,9 +21,10 @@ namespace MovieShop.Web.Controllers
             _movieService = movieService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var topGrossingMovies = await _movieService.GetHighestGrossingMovies();
+            return View(topGrossingMovies);
             // By default when you do return View its gonna return View with Same name as action method.
             // name inside the Views Folder of that Controller name folder.
             // HttpContext in ASP.NET Core and ASP.Net which will provide you with all the information regarding your HTTP Request.

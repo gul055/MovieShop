@@ -30,15 +30,68 @@ namespace MovieShop.Infrastructure.Services
             throw new NotImplementedException();
         }*/
 
-        public Task<IEnumerable<MovieResponseModel>> GetHighestGrossingMovies()
+        public async Task<IEnumerable<MovieResponseModel>> GetHighestGrossingMovies()
         {
-            throw new NotImplementedException();
+            var movies = await _movieRepository.GetHighestRevenueMovies();
+            var movieResponseModel = new List<MovieResponseModel>();
+            foreach(var movie in movies)
+            {
+                movieResponseModel.Add(new MovieResponseModel
+                {
+                    Id = movie.Id,
+                    PosterUrl = movie.PosterUrl,
+                    ReleaseDate = movie.ReleaseDate.Value,
+                    Title = movie.Title
+                });
+            }
+            return movieResponseModel;
         }
 
         public async Task<MovieDetailsResponseModel> GetMovieAsync(int id)
         {
             var movie = await _movieRepository.GetByIdAsync(id);
-            return null;
+            var movieDetailsResponseModel = new MovieDetailsResponseModel();
+            movieDetailsResponseModel.Id = movie.Id;
+            movieDetailsResponseModel.Title = movie.Title;
+            movieDetailsResponseModel.PosterUrl = movie.PosterUrl;
+            movieDetailsResponseModel.BackdropUrl = movie.BackdropUrl;
+            //missig rating, will talk later
+            movieDetailsResponseModel.Overview = movie.Overview;
+            movieDetailsResponseModel.Tagline = movie.Tagline;
+            movieDetailsResponseModel.Budget = movie.Budget;
+            movieDetailsResponseModel.Revenue = movie.Revenue;
+            movieDetailsResponseModel.ImdbUrl = movie.ImdbUrl;
+            movieDetailsResponseModel.TmdbUrl = movie.TmdbUrl;
+            movieDetailsResponseModel.ReleaseDate = movie.ReleaseDate;
+            movieDetailsResponseModel.RunTime = movie.RunTime;
+            movieDetailsResponseModel.Price = movie.Price;
+            //ignore favorite count for now
+            movieDetailsResponseModel.Casts = new List<MovieDetailsResponseModel.CastResponseModel>();
+            foreach(var cast in movie.MovieCasts)
+            {
+                movieDetailsResponseModel.Casts.Add(new MovieDetailsResponseModel.CastResponseModel 
+                {
+                    Id = cast.Cast.Id,
+                    Name = cast.Cast.Name,
+                    Gender = cast.Cast.Gender,
+                    TmdbUrl = cast.Cast.TmdbUrl,
+                    ProfilePath = cast.Cast.ProfilePath,
+                    Character = cast.Character
+                });
+            }
+            movieDetailsResponseModel.Genres = new List<Core.Entities.Genre>();
+            foreach(var genre in movie.MovieGenres)
+            {
+                movieDetailsResponseModel.Genres.Add(new Core.Entities.Genre
+                {
+                    Id = genre.Genre.Id,
+                    Name = genre.Genre.Name
+                });
+            }
+
+
+
+            return movieDetailsResponseModel;
         }
 
         public Task<IEnumerable<MovieResponseModel>> GetMoviesByGenre(int genreId)

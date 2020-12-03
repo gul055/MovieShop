@@ -25,7 +25,8 @@ namespace MovieShop.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Movie>> GetHighestRevenueMovies()
         {
-            throw new NotImplementedException();
+            var movies = await _dbContext.Movies.OrderByDescending(m => m.Revenue).Take(50).ToListAsync();
+            return movies;
         }
         public override async Task<Movie> GetByIdAsync(int id)
         {

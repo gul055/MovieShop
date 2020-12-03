@@ -9,6 +9,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using MovieShop.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using MovieShop.Core.ServiceInterfaces;
+using MovieShop.Infrastructure.Services;
+using MovieShop.Infrastructure.Repositories;
+using MovieShop.Core.RepositoryInterfaces;
+using MovieShop.Core.Entities;
 
 namespace MovieShop.Web
 {
@@ -27,6 +32,12 @@ namespace MovieShop.Web
             services.AddControllersWithViews();
 
             services.AddDbContext<MovieShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieShopDbConnection")));
+
+            services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
+
+            services.AddScoped<IGenreService, GenreService>();
+            services.AddScoped<IAsyncRepository<Genre>, EfRepository<Genre>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

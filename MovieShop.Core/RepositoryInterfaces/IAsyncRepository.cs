@@ -11,8 +11,8 @@ namespace MovieShop.Core.RepositoryInterfaces
         Task<T> GetByIdAsync(int id);
         Task<IEnumerable<T>> ListAllAsync();
         Task<IEnumerable<T>> ListAsync(Expression<Func<T, bool>> filter);
-        Task<int> GetCountAsync(Expression<Func<T, bool>> filter);
-        Task<bool> GetExistsAsync(Expression<Func<T, bool>> filter);
+        Task<int> GetCountAsync(Expression<Func<T, bool>> filter = null);
+        Task<bool> GetExistsAsync(Expression<Func<T, bool>> filter = null);
         Task<T> AddAsync(T entity);
         Task<T> UpdateAsync(T entity);
         Task DeleteAsync(T entity);
