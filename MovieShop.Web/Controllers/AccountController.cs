@@ -22,5 +22,15 @@ namespace MovieShop.Web.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Login(LoginRequestModel loginRequest)
+        {
+            return View();
+        }
+
     }
 }
