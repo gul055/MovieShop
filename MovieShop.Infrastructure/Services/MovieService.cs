@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MovieShop.Core.Models.Request;
 using MovieShop.Core.Models.Response;
 using MovieShop.Core.RepositoryInterfaces;
 using MovieShop.Core.ServiceInterfaces;
@@ -15,11 +16,11 @@ namespace MovieShop.Infrastructure.Services
         {
             _movieRepository = movieRepository;
         }
-        /*public Task<MovieDetailsResponseModel> CreateMovie(MovieCreateRequest movieCreateRequest)
+        public async Task<MovieDetailsResponseModel> CreateMovie(MovieCreateRequest movieCreateRequest)
         {
             throw new NotImplementedException();
         }
-
+        /*
         public Task<PagedResultSet<MovieResponseModel>> GetAllMoviePurchasesByPagination(int pageSize = 20, int page = 0)
         {
             throw new NotImplementedException();
@@ -109,19 +110,19 @@ namespace MovieShop.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        /*public Task<IEnumerable<ReviewMovieResponseModel>> GetReviewsForMovie(int id)
+        public Task<IEnumerable<ReviewMovieResponseModel>> GetReviewsForMovie(int id)
         {
             throw new NotImplementedException();
-        }*/
+        }
 
         public Task<IEnumerable<MovieResponseModel>> GetTopRatedMovies()
         {
             throw new NotImplementedException();
         }
 
-        /*public Task<MovieDetailsResponseModel> UpdateMovie(MovieCreateRequest movieCreateRequest)
+        public Task<MovieDetailsResponseModel> UpdateMovie(MovieCreateRequest movieCreateRequest)
         {
             throw new NotImplementedException();
-        }*/
+        }
     }
 }
