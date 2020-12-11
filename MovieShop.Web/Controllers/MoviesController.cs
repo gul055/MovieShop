@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieShop.Core.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,18 @@ namespace MovieShop.Web.Controllers
 {
     public class MoviesController : Controller
     {
-        public IActionResult Index()
+        private readonly IMovieService _movieService;
+        public MoviesController(IMovieService movieService)
         {
-            return View();
+            _movieService = movieService;
         }
 
-        public IActionResult MovieByGenre(int genreId)
+        [HttpGet]
+        [Route("{Movies}/{genre}/{genreId:int}")]
+        public async Task<IActionResult> MovieByGenre(int genreId)
         {
-            return View();
+            var movies = await _movieService.GetMoviesByGenre(genreId);
+            return View("~/Views/Home/Index.cshtml", movies);
         }
 
         public IActionResult Details(int movieId)
