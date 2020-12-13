@@ -54,8 +54,8 @@ namespace MovieShop.API.Controllers
             var user = await _userService.ValidateUser(loginRequest.Email, loginRequest.Password);
             if (user == null) return Unauthorized();
 
-            var userToken = GenerateJWT(user);
-            return Ok(new { userToken });
+            var token = GenerateJWT(user);
+            return Ok(new { token });
         }
 
         private string GenerateJWT(UserLoginResponseModel userLoginResponseModel)

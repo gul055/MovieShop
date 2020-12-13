@@ -15,17 +15,18 @@ namespace MovieShop.Web.Controllers
             _movieService = movieService;
         }
 
-        [HttpGet]
-        [Route("{Movies}/{genre}/{genreId:int}")]
+        [Route("Movies/genre/{genreId:int}")]
         public async Task<IActionResult> MovieByGenre(int genreId)
         {
             var movies = await _movieService.GetMoviesByGenre(genreId);
             return View("~/Views/Home/Index.cshtml", movies);
         }
 
-        public IActionResult Details(int movieId)
+        [Route("Movies/Details/{movieId:int}")]
+        public async Task<IActionResult> Details(int movieId)
         {
-            return View();
+            var movie = await _movieService.GetMovieAsync(movieId);
+            return View(movie);
         }
 
     }
