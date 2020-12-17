@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace MovieShop.API.Controllers
 {
+    // Attribute based Routing
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase

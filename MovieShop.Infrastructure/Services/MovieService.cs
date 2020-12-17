@@ -52,24 +52,26 @@ namespace MovieShop.Infrastructure.Services
         public async Task<MovieDetailsResponseModel> GetMovieAsync(int id)
         {
             var movie = await _movieRepository.GetByIdAsync(id);
-            var movieDetailsResponseModel = new MovieDetailsResponseModel();
-            movieDetailsResponseModel.Id = movie.Id;
-            movieDetailsResponseModel.Title = movie.Title;
-            movieDetailsResponseModel.PosterUrl = movie.PosterUrl;
-            movieDetailsResponseModel.BackdropUrl = movie.BackdropUrl;
-            //missig rating, will talk later
-            movieDetailsResponseModel.Overview = movie.Overview;
-            movieDetailsResponseModel.Tagline = movie.Tagline;
-            movieDetailsResponseModel.Budget = movie.Budget;
-            movieDetailsResponseModel.Revenue = movie.Revenue;
-            movieDetailsResponseModel.ImdbUrl = movie.ImdbUrl;
-            movieDetailsResponseModel.TmdbUrl = movie.TmdbUrl;
-            movieDetailsResponseModel.ReleaseDate = movie.ReleaseDate;
-            movieDetailsResponseModel.RunTime = movie.RunTime;
-            movieDetailsResponseModel.Price = movie.Price;
-            //ignore favorite count for now
-            movieDetailsResponseModel.Casts = new List<MovieDetailsResponseModel.CastResponseModel>();
-            foreach(var cast in movie.MovieCasts)
+            var movieDetailsResponseModel = new MovieDetailsResponseModel
+            {
+                Id = movie.Id,
+                Title = movie.Title,
+                PosterUrl = movie.PosterUrl,
+                BackdropUrl = movie.BackdropUrl,
+                //missig rating, will talk later
+                Overview = movie.Overview,
+                Tagline = movie.Tagline,
+                Budget = movie.Budget,
+                Revenue = movie.Revenue,
+                ImdbUrl = movie.ImdbUrl,
+                TmdbUrl = movie.TmdbUrl,
+                ReleaseDate = movie.ReleaseDate,
+                RunTime = movie.RunTime,
+                Price = movie.Price,
+                //ignore favorite count for now
+                Casts = new List<MovieDetailsResponseModel.CastResponseModel>()
+            };
+            foreach (var cast in movie.MovieCasts)
             {
                 movieDetailsResponseModel.Casts.Add(new MovieDetailsResponseModel.CastResponseModel 
                 {

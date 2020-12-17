@@ -51,6 +51,9 @@ namespace MovieShop.Web
                 options.ExpireTimeSpan = TimeSpan.FromHours(2);
                 options.LoginPath = "/Account/Login";
             });
+
+            // check if the MovieShopAuthCookie exists, and its not expired
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

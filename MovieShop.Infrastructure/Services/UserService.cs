@@ -33,10 +33,15 @@ namespace MovieShop.Infrastructure.Services
 
         public async Task<UserRegisterResponseModel> CreateUser(UserRegisterRequestModel requestModel)
         {
+            // Make sure email does not exists in the databse
+            // we need to send email to our User repository and see if the data exists for the email
+
             var dbUser = await _userRepository.GetUserByEmail(requestModel.Email);
 
             if (dbUser != null && string.Equals(dbUser.Email, requestModel.Email, StringComparison.CurrentCultureIgnoreCase))
                 throw new Exception("Email Already Exits");
+
+            // First step is to create a unique random salt
 
             var salt = _encryptionService.CreateSalt();
 
